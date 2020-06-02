@@ -2,6 +2,7 @@ package com.poc.livrosapi.mapper;
 
 import com.poc.livrosapi.entities.Book;
 import com.poc.livrosapi.entities.request.BookCreateRequest;
+import com.poc.livrosapi.entities.request.BookUpdateRequest;
 import com.poc.livrosapi.entities.response.BookResponse;
 import org.springframework.stereotype.Component;
 
@@ -27,5 +28,10 @@ public class BookMapper {
                 .pageNumber(book.getPageNumber())
                 .createdAt(book.getCreatedAt())
                 .build();
+    }
+
+    public void bookUpdateToBook(Book book, BookUpdateRequest bookUpdateRequest){
+        book.setName(bookUpdateRequest.getName());
+        book.setPageNumber(bookUpdateRequest.getPageNumber());
     }
 }

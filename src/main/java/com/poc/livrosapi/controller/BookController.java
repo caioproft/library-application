@@ -2,6 +2,7 @@ package com.poc.livrosapi.controller;
 
 import com.poc.livrosapi.entities.Book;
 import com.poc.livrosapi.entities.request.BookCreateRequest;
+import com.poc.livrosapi.entities.request.BookUpdateRequest;
 import com.poc.livrosapi.entities.response.BookResponse;
 import com.poc.livrosapi.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,18 @@ public class BookController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<BookResponse>> findAll(){
         List<BookResponse> bookResponse = bookService.findAll();
+        return new ResponseEntity<>(bookResponse, HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        bookService.delete(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<BookResponse> update(@RequestBody BookUpdateRequest bookUpdateRequest, @PathVariable Long id){
+        BookResponse bookResponse = bookService.update(bookUpdateRequest, id);
         return new ResponseEntity<>(bookResponse, HttpStatus.OK);
     }
 }
