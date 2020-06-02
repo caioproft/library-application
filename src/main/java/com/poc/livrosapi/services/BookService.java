@@ -9,6 +9,8 @@ import com.poc.livrosapi.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,4 +36,15 @@ public class BookService {
 
         return bookResponse;
     }
+
+    public List<BookResponse> findAll(){
+        List<Book> bookList = bookRepository.findAll();
+        List<BookResponse> bookResponse = new ArrayList<>();
+        for(Book book : bookList){
+            bookResponse.add(bookMapper.bookToBookResponse(book));
+        }
+
+        return bookResponse;
+    }
 }
+

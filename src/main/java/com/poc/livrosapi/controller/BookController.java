@@ -31,4 +31,10 @@ public class BookController {
         BookResponse bookResponse = bookService.findOne(id);
         return new ResponseEntity<>(bookResponse, HttpStatus.OK);
     }
+
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<BookResponse>> findAll(){
+        List<BookResponse> bookResponse = bookService.findAll();
+        return new ResponseEntity<>(bookResponse, HttpStatus.OK);
+    }
 }
